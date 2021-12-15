@@ -44,7 +44,7 @@ def input_points(fname: str) -> "Points | None":
 
 def special_Bezier_interpolation(
     points: "numpy.array(nops, 2)"
-) -> "numpy.array(nops, 2)":
+) -> "numpy.array(4 * (nops - 1), 2)":
     """computes control points of a cubic Bezier-curve
     Argument:
     ---------
