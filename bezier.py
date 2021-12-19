@@ -2,8 +2,8 @@ import numpy as np
 from os.path import exists
 
 
-# Points = numpy.array((nops, 2)) where
-# 'nops' is a number of interpolation points
+# Points[size=nops] = numpy.array((n, 2)) is an array of 2D-points
+# where 'nops' is a number of points in the array
 
 def input_points(fname: str) -> "Points | None":
     """provides to read points from a text file
@@ -13,7 +13,7 @@ def input_points(fname: str) -> "Points | None":
                 of the file containing interpolation points
     Effect:
     -------
-        the corresponding list of 2D points if the attempt of reading is
+        the corresponding array of 2D points if the attempt of reading is
         successful or None
     Constraint:
     -----------
@@ -44,8 +44,8 @@ def input_points(fname: str) -> "Points | None":
         
 
 def special_Bezier_interpolation(
-    points: "numpy.array(nops, 2)"
-) -> "numpy.array(4 * (nops - 1), 2)":
+    points: "Points[size=nops]"
+) -> "Points[size=4 * (nops - 1)]":
     """computes control points of a cubic Bezier-curve
     Argument:
     ---------
@@ -136,7 +136,7 @@ def special_Bezier_interpolation(
     return Bezier
 
 
-def save(fname: str, Bezier: "numpy.array(4 * (nops - 1), 2)") -> None:
+def save(fname: str, Bezier: "Points[size=4 * (nops - 1)]") -> None:
     """provides to write Besier control points into a text file
     Argument:
     ---------
@@ -146,7 +146,7 @@ def save(fname: str, Bezier: "numpy.array(4 * (nops - 1), 2)") -> None:
     Effect:
     -------
         the file updated or formed
-    Constraint:
+    Constraints:
     -----------
         each line in the ouput file is formatted as follows
         "float'\t'float'\t'float'\n'"
